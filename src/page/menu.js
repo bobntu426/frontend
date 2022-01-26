@@ -1,142 +1,135 @@
-import React, { useState, useEffect } from 'react'
-import { Link, Outlet, useNavigate } from 'react-router-dom'
-import 'antd/dist/antd.css'
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import { orange } from '@mui/material/colors';
 
-import { Layout, Menu, Breadcrumb, Button } from 'antd'
-import { useQuery } from 'react-apollo'
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  UploadOutlined,
-  HomeOutlined,
-  SettingOutlined,
-  DeleteOutlined,
-  InfoCircleOutlined,
-  SearchOutlined,
-  RightCircleOutlined,
-  GroupOutlined,
-} from '@ant-design/icons'
+const pages = ['近期賽事', '賽事成績', '選手專區', '排名','公告區','影片',];
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const { SubMenu } = Menu
-const { Header, Sider, Content } = Layout
+const ResponsiveAppBar = () => {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-const MySideBar = ({isLogin,user,setIsLogin,setUser}) =>{
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   return (
-    <Layout style={{ height: '100%', overflow: 'auto', minHeight: '100vh' }}>
-      <Layout className="site-layout">
-        <Header className="site-layout-background" style={{ padding: 0 }}>
-          {/* ===================================================================== 
-    Menu Section Start (Top)
-=========================================================================*/}
-          <Menu
-            style={{
-              backgroundColor: '#2d2f33',
-              color: 'white',
-              opacity: '.9',
-            }}
-            className="background"
-            mode="horizontal"
-            theme="dark"
+    <AppBar position="static" style={{backgroundColor:'#d36103'}}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <MenuItem
+            onClick={()=>{}}
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            {/* defaultSelectedKeys={['1']} */}
-            <Menu.Item key="0">
-              
-            </Menu.Item>
-            {!isLogin ? (
-              <>
-                <Menu.Item key="Login" style={{ marginLeft: 'auto' }}>
-                  <Link to="/login">Sign In</Link>
-                </Menu.Item>
-              </>
-            ) : (
-              <>
-                <Menu.Item key="home" icon={<HomeOutlined />}>
-                  <Link to="/">Home</Link>
-                </Menu.Item>
+            PINGPONG
+          </MenuItem>
 
-                <Menu.SubMenu
-                  //   style={{ marginLeft: 'auto' }}
-                  key="Info"
-                  icon={<InfoCircleOutlined />}
-                  title="Info"
-                >
-                  <Menu.ItemGroup title="How to use">
-                    {
-                        <Menu.Item key={'111'}>
-                            <Link to={'i.path'}>{'111'}</Link>
-                        </Menu.Item>
-                    }
-                  </Menu.ItemGroup>
-                </Menu.SubMenu>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+       
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                {page}
+              </Button>
+            ))}
+          </Box>
 
-                <Menu.Item key="search" style={{ marginLeft: 'auto' }} onClick={() => {}}>
-                  <Button
-                    size="small"
-                    type="primary"
-                    shape="circle"
-                    ghost
-                    className="searchButton"
-                    onClick={() => {}}
-                  >
-                    <SearchOutlined />
-                  </Button>
-                </Menu.Item>
-
-                <Menu.SubMenu
-                  //   style={{ marginLeft: 'auto' }}
-                  key="UserInfo"
-                  icon={<UserOutlined />}
-                  title="User"
-                >
-                  <Menu.ItemGroup title="User Information">
-                    <Menu.Item key="setting:1">
-                      <Link to={`${user}/info`}>Account Information</Link>
-                    </Menu.Item>
-                    <Menu.Item key="setting:2">
-                      <Link
-                        to="/"
-                        onClick={() => {
-                          localStorage.clear()
-                          setIsLogin(false)
-                          setUser('')
-                        }}
-                      >
-                        {' '}
-                        Sign Out
-                      </Link>
-                    </Menu.Item>
-                  </Menu.ItemGroup>
-                </Menu.SubMenu>
-              </>
-            )}
-          </Menu>
-          {/* ===================================================================== 
-    Menu Section End (Top)
-=========================================================================*/}
-        </Header>
-
-        <Content
-          className="site-layout-background"
-          style={{
-            margin: '24px 16px',
-            padding: 24,
-            minHeight: 280,
-          }}
-        >
-          <div
-            style={{
-              padding: 24,
-              minHeight: 380,
-              margin: 'auto',
-            }}
-          >
-          </div>
-        </Content>
-      </Layout>
-    </Layout>
-  )
-}
-
-export default MySideBar
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
+};
+export default ResponsiveAppBar;
