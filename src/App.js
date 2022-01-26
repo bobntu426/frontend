@@ -1,9 +1,16 @@
 import './App.css'
 import { useState, useEffect } from 'react'
 import { Button, message } from 'antd'
-
+import Event from './page/event'
+import Home from './page/home'
+import Login from './page/login'
+import Menu from './page/menu'
+import News from './page/news'
+import Player from './page/player'
+import Rank from './page/rank'
+import Result from './page/result'
+import Video from './page/video'
 import styled from 'styled-components'
-
 
 import {
   BrowserRouter as Router,
@@ -15,7 +22,31 @@ import {
 
 
 function App() {
-  return<h1>全國大專院校一般組桌球盃賽網</h1>
+
+  const [isLogin,setIsLogin]=useState(true)
+  const [user,setUser]=useState('')
+
+  return (
+    <>
+      <Menu 
+        isLogin={isLogin}
+        setIsLogin={setIsLogin}
+        user={user}
+        setUser={setUser}
+      />
+      <Routes>
+        <Route element={<Home />} path="/" />
+        <Route element={<Event />} path="/event" />
+        <Route element={<Login />} path="/login" />
+        <Route element={<News />} path="/news" />
+        <Route element={<Player />} path="/player" />
+        <Route element={<Rank />} path="/rank" />
+        <Route element={<Result />} path="/result" />
+        <Route element={<Video />} path="/video" />
+      </Routes>
+    </>
+  )
+  
 }
 
 export default App
