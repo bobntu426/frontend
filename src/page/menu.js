@@ -11,18 +11,28 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { orange } from '@mui/material/colors';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const pages = ['近期賽事', '賽事成績', '選手專區', '排名','公告區','影片',];
+const pages = [
+  {name:'近期賽事',router:'/event'}, 
+  {name:'賽事成績', router:'/result'}, 
+  {name:'選手專區',router:'/player'}, 
+  {name:'排名',router:'/ranking'}, 
+  {name:'公告區',router:'/news'}, 
+  {name:'影片',router:'/video'}, 
+];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
+  const navigate = useNavigate();
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -35,12 +45,14 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(null);
   };
 
+
+
   return (
     <AppBar position="static" style={{backgroundColor:'#d36103'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <MenuItem
-            onClick={()=>{}}
+            onClick={()=>{navigate('/')}}
             variant="h6"
             noWrap
             component="div"
@@ -48,52 +60,17 @@ const ResponsiveAppBar = () => {
           >
             PINGPONG
           </MenuItem>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
        
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={()=>{
+                  navigate(page.router);
+                }}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>

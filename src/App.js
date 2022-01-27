@@ -40,7 +40,7 @@ function App() {
         <Route element={<Login />} path="/login" />
         <Route element={<News />} path="/news" />
         <Route element={<Player />} path="/player" />
-        <Route element={<Rank />} path="/rank" />
+        <Route element={<Rank />} path="/ranking" />
         <Route element={<Result />} path="/result" />
         <Route element={<Video />} path="/video" />
       </Routes>
