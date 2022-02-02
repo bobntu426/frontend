@@ -4,12 +4,13 @@ import { Button, message } from 'antd'
 import Event from './page/event'
 import Home from './page/home'
 import Login from './page/login'
-import Menu from './page/menu'
 import News from './page/news'
 import Player from './page/player'
 import Rank from './page/rank'
 import Result from './page/result'
 import Video from './page/video'
+
+import Menu from './menu/menu'
 import styled from 'styled-components'
 
 import {

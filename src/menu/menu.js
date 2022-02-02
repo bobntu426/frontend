@@ -18,7 +18,7 @@ const pages = [
   {name:'賽事成績', router:'/result'}, 
   {name:'選手專區',router:'/player'}, 
   {name:'排名',router:'/ranking'}, 
-  {name:'公告區',router:'/news'}, 
+  {name:'新聞',router:'/news'}, 
   {name:'影片',router:'/video'}, 
 ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -54,7 +54,6 @@ const ResponsiveAppBar = () => {
           <MenuItem
             onClick={()=>{navigate('/')}}
             variant="h6"
-            noWrap
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
@@ -64,7 +63,7 @@ const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.name}
                 onClick={()=>{
                   navigate(page.router);
                 }}
