@@ -48,35 +48,38 @@ const ResponsiveAppBar = () => {
 
 
   return (
-    <AppBar position="static" style={{backgroundColor:'#d36103'}}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <MenuItem
-            onClick={()=>{navigate('/')}}
-            variant="h6"
-            component="div"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-          >
-            PINGPONG
+    <div style={{
+      backgroundColor:'#d36103',
+      display:'flex',
+      alignItems:'center',
+      height: '4vw',
+      minHeight: '50px'
+    }}>
+        
+          <MenuItem onClick={()=>{navigate('/')}}>
+            <h2>PINGPONG</h2>
           </MenuItem>
-       
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <div > 
             {pages.map((page) => (
               <Button
                 key={page.name}
                 onClick={()=>{
                   navigate(page.router);
                 }}
-                sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page.name}
+               <p style={{
+                 fontSize: '18px',
+                 color: 'white'
+               }}>
+                 {page.name}
+                </p>
               </Button>
             ))}
-          </Box>
+          </div>
 
-          <Box sx={{ flexGrow: 0 }}>
+          
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton onClick={handleOpenUserMenu}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
@@ -102,10 +105,8 @@ const ResponsiveAppBar = () => {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+        
+    </div>
   );
 };
 export default ResponsiveAppBar;

@@ -4,7 +4,7 @@ const Home=()=>{
     const Flexdiv = styled.div`
     display: flex;
     background: white;
-    align-items: center;
+    min-width:'700px';
     height: 88vh;
     width: 100%;
     position: relative;

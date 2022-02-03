@@ -9,38 +9,45 @@ const Pingpong=({content,color})=>{
                 display:'flex',
                 justifyContent:'center',
                 cursor:'pointer',
+                height: '15vw',
+                top:'20vh',
+                minHeight: '100px'
             }}
             onClick={()=>{navigate(content.router)}}
             onMouseOver={()=>{}}
         >
             {
                 color=='white'?
-                <img src='https://i.imgur.com/Wv3hoS5.png' style={{width:'30vh'}} />:
-                <img src='https://i.imgur.com/bDhohXc.png' style={{width:'30vh'}} />
+                <img src='https://i.imgur.com/Wv3hoS5.png'/>:
+                <img src='https://i.imgur.com/bDhohXc.png'/>
             }
             
             <div style={{
                 display:'flex',
                 position:'absolute',
-                top:'5vh',
-                width:'13.5vh',
-                height: '4vh',
+                top:'15%',
+                width:'6.75vw',
+                height: '2vw',
                 justifyContent:'center',
+                minHeight:'15px',
+                minWidth:'50px'
                 
             }}>
-                <h1 style={{margin:'0px',fontSize:'3vh'}} >{content.name}</h1>
+                <h1 style={{margin:'0px',fontSize:'1.5vw'}} >{content.name}</h1>
             </div>
 
             <div style={{
                 display:'flex',
                 position:'absolute',
-                top:'11vh',
-                width: '20vh',
-                height: '12vh',
+                top:'35%',
+                width: '10vw',
+                height: '6vw',
                 justifyContent:'center',
+                minWidth: '65px',
+                minHeight: '40px'
                 
             }}>
-                <p style={{margin:'0px',fontSize:'2.5vh'}}>{content.introduction}</p>
+                <p style={{margin:'0px',fontSize:'1.25vw'}}>{content.introduction}</p>
             </div>
         </div>
     )
