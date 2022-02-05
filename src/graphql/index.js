@@ -1,3 +1,3 @@
-export { GET_THING_BY_PATH } from './queries'
-export { CREATE_USER_MUTATION } from './mutations'
+export { GET_ALL_PEOPLE } from './queries'
+
 

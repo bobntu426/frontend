@@ -1,4 +1,7 @@
+import {useSearchParams} from "react-router-dom"
 const Player=()=>{
-    return <p>player</p>
+    const [searchParams,setSearchParams]= useSearchParams();
+    console.log(searchParams.get('playerId'))
+    return <p>{searchParams.get('playerId')}</p>
 }
 export default Player

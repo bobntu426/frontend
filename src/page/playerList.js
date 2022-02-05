@@ -12,7 +12,7 @@ const PageDiv = styled.div`
     flex-direction: column;
     /* border: solid 2px rgb(181, 207, 29); */
     `
-const Flexdiv = styled.div`
+const Flexdiv2 = styled.div`
     background: white;
     min-width:'700px';
     width: 95%;
@@ -27,23 +27,17 @@ const SmallDiv = styled.div`
     justify-content: center;
     flex: 1;
     `
-const Rank=()=>{
+const PlayerList=()=>{
     const {loading,data}=useQuery(GET_ALL_PEOPLE)
     const navigate = useNavigate()
     return (
     loading?<p>loading</p>:
     <PageDiv>
-        <Flexdiv>
+        <Flexdiv2>
             <div style={{
                 display: 'flex',
                 borderBottom:'solid 2px rgb(181, 207, 29)'
             }}>
-                <SmallDiv style={{
-                    flex: '0.2'
-                }}>
-                    <p>排名</p>
-                </SmallDiv>
-
                 <SmallDiv>
                     <p>名字</p>
                 </SmallDiv>
@@ -51,9 +45,17 @@ const Rank=()=>{
                 <SmallDiv>
                     <p>學校</p>
                 </SmallDiv>
+
+                <SmallDiv>
+                    <p>性別</p>
+                </SmallDiv>
                 
                 <SmallDiv>
-                    <p>積分</p>
+                    <p>排名</p>
+                </SmallDiv>
+
+                <SmallDiv>
+                    <p>熱門度</p>
                 </SmallDiv>
 
             </div>
@@ -74,12 +76,6 @@ const Rank=()=>{
                             onClick={()=>{navigate(`/player?playerId=${person.id}`)}}
                             key={index}
                         >
-                            <SmallDiv style={{
-                                flex: '0.2'
-                            }}>
-                                <p>{index+1}</p>
-                            </SmallDiv>
-
                             <SmallDiv>
                                 <p>{person.name}</p>
                             </SmallDiv>
@@ -89,15 +85,27 @@ const Rank=()=>{
                             </SmallDiv>
 
                             <SmallDiv>
-                                <p>{person.score}</p>
+                            {
+                                person.gender=='male'?
+                                <p>男</p>:<p>女</p>
+                            }
                             </SmallDiv>
+
+                            <SmallDiv >
+                                <p>{index+1}</p>
+                            </SmallDiv>
+
+                            <SmallDiv>
+                                <p>{person.popular}</p>
+                            </SmallDiv>
+
                         </div>
                     )
                 })
             }
             
-        </Flexdiv>
+        </Flexdiv2>
     </PageDiv>
     )
 }
-export default Rank
+export default PlayerList

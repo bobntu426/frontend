@@ -4,8 +4,14 @@ import { Query } from 'react-apollo';
 export const GET_ALL_PEOPLE = gql`
   query {
     getAllPeople{
-
+      name
+      score
+      school
+      id
+      popular
+      gender
     }
+  }
 `;
 
 

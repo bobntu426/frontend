@@ -5,6 +5,7 @@ import Event from './page/event'
 import Home from './page/home'
 import Login from './page/login'
 import News from './page/news'
+import PlayerList from './page/playerList'
 import Player from './page/player'
 import Rank from './page/rank'
 import Result from './page/result'
@@ -40,6 +41,7 @@ function App() {
         <Route element={<Event />} path="/event" />
         <Route element={<Login />} path="/login" />
         <Route element={<News />} path="/news" />
+        <Route element={<PlayerList />} path="/playerList" />
         <Route element={<Player />} path="/player" />
         <Route element={<Rank />} path="/ranking" />
         <Route element={<Result />} path="/result" />

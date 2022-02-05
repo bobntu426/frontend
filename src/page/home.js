@@ -1,7 +1,6 @@
 import Pingpong from '../component/home/pingpong.js'
 import styled from 'styled-components'
-const Home=()=>{
-    const Flexdiv = styled.div`
+const Flexdiv = styled.div`
     display: flex;
     background: white;
     min-width:'700px';
@@ -10,6 +9,8 @@ const Home=()=>{
     position: relative;
     justify-content: center;
     `
+const Home=()=>{
+    
     const pingpongList=[
         {
             name:'近期賽事',
@@ -24,12 +25,12 @@ const Home=()=>{
         {
             name:'選手專區',
             introduction:'選手資訊查詢',
-            router:'/player'
+            router:'/playerList'
         },
         {
             name:'排名',
             introduction:'選手在各種項目的排名',
-            router:'/rank'
+            router:'/ranking'
         },
         {
             name:'新聞',
