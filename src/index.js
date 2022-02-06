@@ -19,7 +19,7 @@ const httpLink = new HttpLink({
 })
 
 const wsLink = new WebSocketLink({
-    uri: `http://ec2-54-254-159-190.ap-southeast-1.compute.amazonaws.com:3000/`,
+    uri: `ws://ec2-54-254-159-190.ap-southeast-1.compute.amazonaws.com:3000/`,
     options: { reconnect: true }
 })
 const link = split(
