@@ -16,11 +16,11 @@ import { getMainDefinition } from 'apollo-utilities'
 
 
 const httpLink = new HttpLink({
-    uri: 'http://localhost:4000/'
+    uri: 'http://ec2-54-254-159-190.ap-southeast-1.compute.amazonaws.com:4000/'
 })
 
 const wsLink = new WebSocketLink({
-    uri: `ws://localhost:4000/`,
+    uri: `ws://ec2-54-254-159-190.ap-southeast-1.compute.amazonaws.com:4000/`,
     options: { reconnect: true }
 })
 const link = split(
