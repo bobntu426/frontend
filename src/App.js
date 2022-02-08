@@ -1,6 +1,5 @@
 import './App.css'
 import { useState, useEffect } from 'react'
-import { Button, message } from 'antd'
 import Event from './page/event'
 import Home from './page/home'
 import Login from './page/login'

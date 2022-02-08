@@ -11,8 +11,8 @@ import { useNavigate} from 'react-router-dom';
 const pages = [
   {name:'近期賽事',router:'/event'}, 
   {name:'賽事成績', router:'/result'}, 
-  {name:'選手專區',router:'/playerList'}, 
-  {name:'排名',router:'/ranking'}, 
+  {name:'選手專區',router:'/playerList/page=1'}, 
+  {name:'排名',router:'/ranking/page=1'}, 
   {name:'新聞',router:'/news'}, 
   {name:'影片',router:'/video'}, 
 ];

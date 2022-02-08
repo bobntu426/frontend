@@ -13,5 +13,36 @@ export const GET_ALL_PEOPLE = gql`
     }
   }
 `;
+export const GET_ONE_PERSON = gql`
+  query($id: Int){
+    getOnePerson(id:$id){
+      name
+      score
+      school
+      id
+      popular
+      gende
+      rank
+    }
+  }
+`
+export const GET_TWENTY_PERSON = gql`
+  query($maximum:Int,$minimum:Int){
+    getTwentyPeople(maximum:$maximum,minimum:$minimum){
+      name
+      score
+      school
+      id
+      popular
+      gender
+      rank
+    }
+  }
+`
+export const GET_ALL_PEOPLE_NUM = gql`
+query{
+ getAllPeopleNum
+}
+`
 
 

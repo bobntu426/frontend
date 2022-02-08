@@ -1,70 +1,80 @@
-import styled from 'styled-components'
+
 import { useQuery } from 'react-apollo'
-import { GET_ALL_PEOPLE } from '../graphql'
+import { GET_TWENTY_PERSON,GET_ALL_PEOPLE_NUM } from '../graphql'
 import { useNavigate} from 'react-router-dom';
-const PageDiv = styled.div`
-    display: flex;
-    background: white;
-    min-width:'700px';
-    width: 100%;
-    position: relative;
-    align-items: center;
-    flex-direction: column;
-    /* border: solid 2px rgb(181, 207, 29); */
-    `
-const Flexdiv = styled.div`
-    background: white;
-    min-width:'700px';
-    width: 95%;
-    position: relative;
-    justify-content: center;
-    flex-direction: column;
-    /* border: solid 2px rgb(181, 207, 29); */
-    `
-const SmallDiv = styled.div`
-    /* border:solid 2px rgb(181, 207, 29); */
-    display: flex;
-    justify-content: center;
-    flex: 1;
-    `
+import {PageDiv,SmallFlexDiv,ColumnFlexDiv,RowFlexdiv} from '../styleComponent'
+import Button from '@mui/material/Button';
+import {useSearchParams} from "react-router-dom"
+import { useEffect, useState } from 'react';
+
 const Rank=()=>{
-    const {loading,data}=useQuery(GET_ALL_PEOPLE)
+    const [searchParams,setSearchParams]= useSearchParams()
+    const [nowPage,setPage] =useState(searchParams.get('page'))
+   
+   
     const navigate = useNavigate()
+    const [isFirstPage,setIsFirstPage] = useState(true)
+    const [isLastPage,setIsLastPage] = useState(false)
+
+    const {loading,data,refetch}=useQuery(GET_TWENTY_PERSON,{variables:{minimum:nowPage*20-19,maximum:nowPage*20}})
+    const {loading:loadingAllPeopleNum,data:allPeopleNum}=useQuery(GET_ALL_PEOPLE_NUM)
+
+    useEffect(()=>{
+        if(data&&allPeopleNum){
+            if(data.getTwentyPeople.at(-1).rank==allPeopleNum.getAllPeopleNum)
+                setIsLastPage(true)
+            else
+                setIsLastPage(false)
+        }
+    },[data,allPeopleNum])
+
+    useEffect(()=>{
+        setPage(searchParams.get('page'))
+        if(searchParams.get('page')==1)
+            setIsFirstPage(true)
+        else
+            setIsFirstPage(false)
+    },[searchParams.get('page')])
+
+
     return (
-    loading?<p>loading</p>:
+    loading||loadingAllPeopleNum?<p>loading</p>:
     <PageDiv>
-        <Flexdiv>
+        <ColumnFlexDiv>
             <div style={{
+                width: '100%',
                 display: 'flex',
                 borderBottom:'solid 2px rgb(181, 207, 29)'
             }}>
-                <SmallDiv style={{
+                <SmallFlexDiv style={{
                     flex: '0.2'
                 }}>
                     <p>排名</p>
-                </SmallDiv>
+                </SmallFlexDiv>
 
-                <SmallDiv>
+                <SmallFlexDiv>
                     <p>名字</p>
-                </SmallDiv>
+                </SmallFlexDiv>
 
-                <SmallDiv>
+                <SmallFlexDiv>
                     <p>學校</p>
-                </SmallDiv>
+                </SmallFlexDiv>
                 
-                <SmallDiv>
+                <SmallFlexDiv>
                     <p>積分</p>
-                </SmallDiv>
+                </SmallFlexDiv>
 
             </div>
             
                 
                
             {    
-                data.getAllPeople.map((person,index)=>{
+                data.getTwentyPeople.map((person,index)=>{
+
                     return(
                         <div 
                             style={{
+                                width: '100%',
                                 display: 'flex',
                                 borderBottom:'solid 2px rgb(181, 207, 29)',
                                 cursor:'pointer',
@@ -74,29 +84,56 @@ const Rank=()=>{
                             onClick={()=>{navigate(`/player?playerId=${person.id}`)}}
                             key={index}
                         >
-                            <SmallDiv style={{
+                            <SmallFlexDiv style={{
                                 flex: '0.2'
                             }}>
-                                <p>{index+1}</p>
-                            </SmallDiv>
+                                <p>{person.rank}</p>
+                            </SmallFlexDiv>
 
-                            <SmallDiv>
+                            <SmallFlexDiv>
                                 <p>{person.name}</p>
-                            </SmallDiv>
+                            </SmallFlexDiv>
 
-                            <SmallDiv>
+                            <SmallFlexDiv>
                                 <p>{person.school}</p>
-                            </SmallDiv>
+                            </SmallFlexDiv>
 
-                            <SmallDiv>
+                            <SmallFlexDiv>
                                 <p>{person.score}</p>
-                            </SmallDiv>
+                            </SmallFlexDiv>
                         </div>
                     )
                 })
             }
-            
-        </Flexdiv>
+            <RowFlexdiv>
+                <Button 
+                    variant="outlined"
+                    disabled={isFirstPage}
+                    onClick={()=>{
+                        setSearchParams({page:parseInt(nowPage)-1})
+                    }}
+                    style={{
+                        position:'relative',
+                        bottom:'-5vh'
+                    }}
+                >
+                    上一頁
+                </Button>
+                <Button 
+                    variant="outlined"
+                    disabled={isLastPage}
+                    onClick={()=>{
+                        setSearchParams({page:parseInt(nowPage)+1})
+                    }}
+                    style={{
+                        position:'relative',
+                        bottom:'-5vh'
+                    }}
+                >
+                    下一頁
+                </Button>
+            </RowFlexdiv>
+        </ColumnFlexDiv>
     </PageDiv>
     )
 }

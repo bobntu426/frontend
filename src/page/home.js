@@ -1,14 +1,6 @@
 import Pingpong from '../component/home/pingpong.js'
-import styled from 'styled-components'
-const Flexdiv = styled.div`
-    display: flex;
-    background: white;
-    min-width:'700px';
-    height: 88vh;
-    width: 100%;
-    position: relative;
-    justify-content: center;
-    `
+
+import {PageDiv,RowFlexdiv,ColumnFlexDiv} from '../styleComponent'
 const Home=()=>{
     
     const pingpongList=[
@@ -25,12 +17,12 @@ const Home=()=>{
         {
             name:'選手專區',
             introduction:'選手資訊查詢',
-            router:'/playerList'
+            router:'/playerList?page=1'
         },
         {
             name:'排名',
             introduction:'選手在各種項目的排名',
-            router:'/ranking'
+            router:'/ranking?page=1'
         },
         {
             name:'新聞',
@@ -44,14 +36,23 @@ const Home=()=>{
         },
     ]
     return(
-    <Flexdiv>
-        <Pingpong content={pingpongList[0]} color={'white'}/>
-        <Pingpong content={pingpongList[1]} color={'orange'}/>
-        <Pingpong content={pingpongList[2]} color={'white'}/>
-        <Pingpong content={pingpongList[3]} color={'orange'}/>
-        <Pingpong content={pingpongList[4]} color={'white'}/>
-        <Pingpong content={pingpongList[5]} color={'orange'}/>
-    </Flexdiv>
+    <PageDiv>
+        <ColumnFlexDiv style={{
+            backgroundColor:'#c5d1dd',
+            width: '100%'
+        }}>
+            <h2>簡介</h2>
+            <p>統整大專界一般組的各大盃賽資訊以及各選手的資訊</p>
+        </ColumnFlexDiv>
+        <RowFlexdiv>
+            <Pingpong content={pingpongList[0]} color={'white'}/>
+            <Pingpong content={pingpongList[1]} color={'orange'}/>
+            <Pingpong content={pingpongList[2]} color={'white'}/>
+            <Pingpong content={pingpongList[3]} color={'orange'}/>
+            <Pingpong content={pingpongList[4]} color={'white'}/>
+            <Pingpong content={pingpongList[5]} color={'orange'}/>
+        </RowFlexdiv>
+    </PageDiv>
     )
 }
 export default Home
