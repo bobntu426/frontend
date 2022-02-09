@@ -16,17 +16,17 @@ const Rank=()=>{
     const [isFirstPage,setIsFirstPage] = useState(true)
     const [isLastPage,setIsLastPage] = useState(false)
 
-    const {loading,data,refetch}=useQuery(GET_TWENTY_PERSON,{variables:{minimum:nowPage*20-19,maximum:nowPage*20}})
-    const {loading:loadingAllPeopleNum,data:allPeopleNum}=useQuery(GET_ALL_PEOPLE_NUM)
+    const {loading,data,refetch}=useQuery(GET_TWENTY_PERSON,{variables:{minimum:nowPage*20-19,maximum:nowPage*20,gender:'male'}})
+    const {loading:loadingPeopleNum,data:PeopleNum}=useQuery(GET_ALL_PEOPLE_NUM,{variables:{gender:'male'}})
 
     useEffect(()=>{
-        if(data&&allPeopleNum){
-            if(data.getTwentyPeople.at(-1).rank==allPeopleNum.getAllPeopleNum)
+        if(data&&PeopleNum){
+            if(data.getTwentyPeople.at(-1).rank==PeopleNum.getPeopleNum)
                 setIsLastPage(true)
             else
                 setIsLastPage(false)
         }
-    },[data,allPeopleNum])
+    },[data,PeopleNum])
 
     useEffect(()=>{
         setPage(searchParams.get('page'))
@@ -38,7 +38,7 @@ const Rank=()=>{
 
 
     return (
-    loading||loadingAllPeopleNum?<p>loading</p>:
+    loading||loadingPeopleNum?<p>loading</p>:
     <PageDiv>
         <ColumnFlexDiv>
             <div style={{

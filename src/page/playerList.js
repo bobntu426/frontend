@@ -5,7 +5,7 @@ import { useNavigate} from 'react-router-dom';
 import {PageDiv,SmallFlexDiv,ColumnFlexDiv} from '../styleComponent'
 
 const PlayerList=()=>{
-    const {loading,data}=useQuery(GET_ALL_PEOPLE)
+    const {loading,data}=useQuery(GET_ALL_PEOPLE,{variables:{gender:'male'}})
     const navigate = useNavigate()
     return (
     loading?<p>loading</p>:
