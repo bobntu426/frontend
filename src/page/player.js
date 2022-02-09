@@ -2,6 +2,7 @@ import {useSearchParams} from "react-router-dom"
 import { useQuery } from "react-apollo"
 import { GET_ONE_PERSON } from "../graphql"
 import { ColumnFlexDiv } from "../styleComponent"
+import { useEffect } from "react"
 const Player=()=>{
     const [searchParams]= useSearchParams()
     const {data,loading} = useQuery(GET_ONE_PERSON,{variables:{id:searchParams.get('playerId')}})

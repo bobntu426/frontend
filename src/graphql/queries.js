@@ -21,7 +21,7 @@ export const GET_ONE_PERSON = gql`
       school
       id
       popular
-      gende
+      gender
       rank
     }
   }
