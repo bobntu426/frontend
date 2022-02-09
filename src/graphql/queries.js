@@ -14,14 +14,14 @@ export const GET_ALL_PEOPLE = gql`
   }
 `;
 export const GET_ONE_PERSON = gql`
-  query($id: Int){
+  query($id:Int){
     getOnePerson(id:$id){
       name
       score
       school
       id
       popular
-      gende
+      gender
       rank
     }
   }
