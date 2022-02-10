@@ -1,6 +1,6 @@
 
 import { useQuery } from 'react-apollo'
-import { GET_TWENTY_PERSON,GET_ALL_PEOPLE_NUM } from '../graphql'
+import { GET_TWENTY_PEOPLE,GET_PEOPLE_NUM } from '../graphql'
 import { useNavigate} from 'react-router-dom';
 import {PageDiv,SmallFlexDiv,ColumnFlexDiv,RowFlexdiv} from '../styleComponent'
 import Button from '@mui/material/Button';
@@ -16,8 +16,8 @@ const Rank=()=>{
     const [isFirstPage,setIsFirstPage] = useState(true)
     const [isLastPage,setIsLastPage] = useState(false)
 
-    const {loading,data,refetch}=useQuery(GET_TWENTY_PERSON,{variables:{minimum:nowPage*20-19,maximum:nowPage*20,gender:'male'}})
-    const {loading:loadingPeopleNum,data:PeopleNum}=useQuery(GET_ALL_PEOPLE_NUM,{variables:{gender:'male'}})
+    const {loading,data,refetch}=useQuery(GET_TWENTY_PEOPLE,{variables:{minimum:nowPage*20-19,maximum:nowPage*20,gender:'male'}})
+    const {loading:loadingPeopleNum,data:PeopleNum}=useQuery(GET_PEOPLE_NUM,{variables:{gender:'male'}})
 
     useEffect(()=>{
         if(data&&PeopleNum){

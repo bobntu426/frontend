@@ -1,11 +1,11 @@
 
 import { useQuery } from 'react-apollo'
-import { GET_ALL_PEOPLE } from '../graphql'
+import { GET_PEOPLE } from '../graphql'
 import { useNavigate} from 'react-router-dom';
 import {PageDiv,SmallFlexDiv,ColumnFlexDiv} from '../styleComponent'
 
 const PlayerList=()=>{
-    const {loading,data}=useQuery(GET_ALL_PEOPLE,{variables:{gender:'male'}})
+    const {loading,data}=useQuery(GET_PEOPLE,{variables:{gender:'male'}})
     const navigate = useNavigate()
     return (
     loading?<p>loading</p>:
@@ -39,7 +39,7 @@ const PlayerList=()=>{
             </div>
 
             {    
-                data.getAllPeople.map((person,index)=>{
+                data.getPeople.map((person,index)=>{
                     return(
                         <div 
                             style={{
