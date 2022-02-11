@@ -44,7 +44,12 @@ export const GET_RANK_DOUBLE_DATA = gql`
     getRankDoubleData(maximum:$maximum,minimum:$minimum,gender:$gender){
       player{
         name
+        score
+        school
         id
+        popular
+        gender
+        rank
       }
       score
       gender

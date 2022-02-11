@@ -86,7 +86,7 @@ const Rank=()=>{
 
 
     return (
-    singleDataLoading||loadingNumber||doubleDataLoading?<p>loading</p>:
+    
     <PageDiv>
         
         <ColumnFlexDiv>
@@ -166,8 +166,8 @@ const Rank=()=>{
             </div>
             
                 
-            
-            {rankTypeList[nowType].type=='single'?
+            {singleDataLoading||loadingNumber||doubleDataLoading?<p>loading</p>:(
+            rankTypeList[nowType].type=='single'?
                 singleData.getRankSingleData.map((person,index)=>{
 
                     return(
@@ -264,7 +264,7 @@ const Rank=()=>{
                     )
                 })
                 
-            }
+            )}
             <RowFlexdiv>
                 <Button 
                     variant="outlined"
