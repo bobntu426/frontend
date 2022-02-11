@@ -26,9 +26,9 @@ export const GET_PERSON_BY_ID = gql`
     }
   }
 `
-export const GET_TWENTY_PEOPLE = gql`
+export const GET_RANK_SINGLE_DATA = gql`
   query($maximum:Int,$minimum:Int,$gender:Gender){
-    getTwentyPeople(maximum:$maximum,minimum:$minimum,gender:$gender){
+    getRankSingleData(maximum:$maximum,minimum:$minimum,gender:$gender){
       name
       score
       school
@@ -39,9 +39,24 @@ export const GET_TWENTY_PEOPLE = gql`
     }
   }
 `
-export const GET_PEOPLE_NUM = gql`
-query($gender:Gender){
- getPeopleNum(gender:$gender)
+export const GET_RANK_DOUBLE_DATA = gql`
+  query($maximum:Int,$minimum:Int,$gender:Gender){
+    getRankDoubleData(maximum:$maximum,minimum:$minimum,gender:$gender){
+      player{
+        name
+        id
+      }
+      score
+      gender
+      id
+      rank
+      school
+    }
+  }
+`
+export const GET_COUNT = gql`
+query($gender:Gender,$type:NumberType){
+ getCount(gender:$gender,type:$type)
 }
 `
 
@@ -105,7 +120,7 @@ export const GET_EVENT = gql`
 
 export const GET_EVENT_NUM = gql`
 query($state:EventState){
- getEventNum(state:$state)
+  getEventNum(state:$state)
 }
 `
 

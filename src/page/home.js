@@ -22,7 +22,7 @@ const Home=()=>{
         {
             name:'排名',
             introduction:'選手在各種項目的排名',
-            router:'/ranking?page=1'
+            router:'/ranking'
         },
         {
             name:'新聞',

@@ -6,7 +6,6 @@ import { useEffect } from "react"
 const Player=()=>{
     const [searchParams]= useSearchParams()
     const {data,loading} = useQuery(GET_PERSON_BY_ID,{variables:{id:searchParams.get('playerId')}})
-    
 
     useEffect(()=>{
     
