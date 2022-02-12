@@ -2,10 +2,15 @@
 import { useQuery } from 'react-apollo'
 import { GET_RANK_SINGLE_DATA,GET_COUNT,GET_RANK_DOUBLE_DATA } from '../graphql'
 import { useNavigate} from 'react-router-dom';
-import {PageDiv,SmallFlexDiv,ColumnFlexDiv,RowFlexdiv} from '../styleComponent'
-import Button from '@mui/material/Button';
+import {PageDiv,ColumnFlexDiv} from '../styleComponent'
+
 import {useSearchParams} from "react-router-dom"
 import { useEffect, useState } from 'react';
+import Project from '../component/rank/rankProject';
+import RankMenu from '../component/rank/rankMenu';
+import SingleRank from '../component/rank/singleRank';
+import DoubleRank from '../component/rank/doubleRank';
+import ChangePage from '../component/rank/changePage';
 
 const Rank=()=>{
     const rankTypeList = [
@@ -88,211 +93,42 @@ const Rank=()=>{
     return (
     
     <PageDiv>
-        
         <ColumnFlexDiv>
-            <RowFlexdiv style={{
-                marginTop:'5vw',
-                marginBottom:'2vw',
-                borderBottom: 'solid 1px #c5d1dd'
-            }}>
-                {
-                    rankTypeList.map((o,index)=>
-                        <SmallFlexDiv 
-                            key={index}
-                            style={nowType==index?{cursor:'pointer',borderBottom:'solid 2px red'}:{cursor:'pointer',borderBottom:'none'}}
-                            onMouseOver={(e)=>{
-                                if(nowType!=index){
-                                    e.currentTarget.style.backgroundColor = '#c5d1dd'
-                                    e.currentTarget.style.borderBottom = 'solid 2px #c5d1dd'
-                                }
-                            }}
-                            onMouseOut={(e)=>{
-                                if(nowType!=index){
-                                    e.currentTarget.style.borderBottom = 'solid 2px white'
-                                }
-                                e.currentTarget.style.backgroundColor = 'white'
-                            }}
-                            onMouseDown={()=>{
-                                searchParams.set('type',index)
-                                searchParams.set('page',1)
-                                setSearchParams(searchParams)
-                                if(rankTypeList[index].type=='single')
-                                    refetchSingleData({
-                                        minimum:nowPage*20-19,
-                                        maximum:nowPage*20,
-                                        gender:o.gender,
-                                    })
-                                else{
-                                    refetchDoubleData({
-                                        minimum:nowPage*20-19,
-                                        maximum:nowPage*20,
-                                        gender:o.gender,
-                                    })
-                                }
-
-                            }}
-                        >
-                            <p>{o.chi}</p>
-                        </SmallFlexDiv>
-                    )
-                }
-                
-
-            </RowFlexdiv>
-
-            <div style={{
-                width: '100%',
-                display: 'flex',
-                borderBottom:'solid 2px rgb(181, 207, 29)'
-            }}>
-                <SmallFlexDiv style={{
-                    flex: '0.2'
-                }}>
-                    <p>排名</p>
-                </SmallFlexDiv>
-
-                <SmallFlexDiv>
-                    <p>名字</p>
-                </SmallFlexDiv>
-
-                <SmallFlexDiv>
-                    <p>學校</p>
-                </SmallFlexDiv>
-                
-                <SmallFlexDiv>
-                    <p>積分</p>
-                </SmallFlexDiv>
-
-            </div>
+            
+            <Project 
+                rankTypeList={rankTypeList}
+                nowType={nowType}
+                searchParams={searchParams}
+                setSearchParams={setSearchParams}
+                nowPage={nowPage}
+                refetchSingleData={refetchSingleData}
+                refetchDoubleData={refetchDoubleData}
+            />
+            <RankMenu />
             
                 
             {singleDataLoading||loadingNumber||doubleDataLoading?<p>loading</p>:(
-            rankTypeList[nowType].type=='single'?
-                singleData.getRankSingleData.map((person,index)=>{
-
-                    return(
-                        <div 
-                            style={{
-                                width: '100%',
-                                display: 'flex',
-                                borderBottom:'solid 2px rgb(181, 207, 29)',
-                                cursor:'pointer',
-                            }}
-                            onMouseOver={(e)=>{e.currentTarget.style.backgroundColor='#c5d1dd'}}
-                            onMouseOut={(e)=>{e.currentTarget.style.backgroundColor='white'}}
-                            onClick={()=>{navigate(`/player?playerId=${person.id}`)}}
-                            key={index}
-                        >
-                            <SmallFlexDiv style={{
-                                flex: '0.2'
-                            }}>
-                                <p>{person.rank}</p>
-                            </SmallFlexDiv>
-
-                            {rankTypeList[nowType].type=='single'?
-                            <SmallFlexDiv>
-                                <p>{person.name}</p>
-                            </SmallFlexDiv>:
-                            <SmallFlexDiv style={{
-                                flexDirection:'column'
-                            }}>
-                                <p>{person.name[0]}</p>
-                                <p>{person.name[1]}</p>
-                            </SmallFlexDiv>
-                            }
-
-                            <SmallFlexDiv>
-                                <p>{person.school}</p>
-                            </SmallFlexDiv>
-
-                            <SmallFlexDiv>
-                                <p>{person.score}</p>
-                            </SmallFlexDiv>
-                        </div>
-                    )
-                }):
-                doubleData.getRankDoubleData.map((person,index)=>{
-                    return(
-                        <div 
-                            style={{
-                                width: '100%',
-                                display: 'flex',
-                                borderBottom:'solid 2px rgb(181, 207, 29)',
-                                
-                            }}
-                            
-                            key={index}
-                        >
-                            <SmallFlexDiv style={{
-                                flex: '0.2'
-                            }}>
-                                <p>{person.rank}</p>
-                            </SmallFlexDiv>
-
-                            
-
-                            <SmallFlexDiv style={{
-                                flexDirection:'column'
-                            }}>
-                                <SmallFlexDiv 
-                                    onMouseOver={(e)=>{e.currentTarget.style.backgroundColor='#c5d1dd'}}
-                                    onMouseOut={(e)=>{e.currentTarget.style.backgroundColor='white'}}
-                                    style={{cursor:'pointer'}}
-                                    onClick={()=>{navigate(`/player?playerId=${person.player[0].id}`)}}
-                                >
-                                    <p>{person.player[0].name}</p>
-                                </SmallFlexDiv>
-                                <SmallFlexDiv 
-                                    onMouseOver={(e)=>{e.currentTarget.style.backgroundColor='#c5d1dd'}}
-                                    onMouseOut={(e)=>{e.currentTarget.style.backgroundColor='white'}}
-                                    style={{cursor:'pointer'}}
-                                    onClick={()=>{navigate(`/player?playerId=${person.player[1].id}`)}}
-                                >
-                                    <p>{person.player[1].name}</p>
-                                </SmallFlexDiv>
-                            </SmallFlexDiv>
-                            
-
-                            <SmallFlexDiv>
-                                <p>{person.school}</p>
-                            </SmallFlexDiv>
-
-                            <SmallFlexDiv>
-                                <p>{person.score}</p>
-                            </SmallFlexDiv>
-                        </div>
-                    )
-                })
+            <>
+                {rankTypeList[nowType].type=='single'?
+                    <SingleRank 
+                        singleData={singleData}
+                        navigate={navigate}
+                    />:
+                    <DoubleRank 
+                        doubleData={doubleData}
+                        navigate={navigate}
+                    />
+                }
+                    
                 
-            )}
-            <RowFlexdiv>
-                <Button 
-                    variant="outlined"
-                    disabled={isFirstPage}
-                    onClick={()=>{
-                        setSearchParams({page:parseInt(nowPage)-1})
-                    }}
-                    style={{
-                        position:'relative',
-                        bottom:'-5vh'
-                    }}
-                >
-                    上一頁
-                </Button>
-                <Button 
-                    variant="outlined"
-                    disabled={isLastPage}
-                    onClick={()=>{
-                        setSearchParams({page:parseInt(nowPage)+1})
-                    }}
-                    style={{
-                        position:'relative',
-                        bottom:'-5vh'
-                    }}
-                >
-                    下一頁
-                </Button>
-            </RowFlexdiv>
+                <ChangePage
+                    isFirstPage={isFirstPage}
+                    setSearchParams={setSearchParams}
+                    nowPage={nowPage}
+                    isLastPage={isLastPage}
+                />
+            </>)}
+            
         </ColumnFlexDiv>
     </PageDiv>
     )
