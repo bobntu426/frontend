@@ -1,4 +1,4 @@
-import { SmallFlexDiv , RowFlexdiv} from "../../styleComponent"
+import {RowFlexdiv} from "../styleComponent"
 import Button from '@mui/material/Button';
 const ChangePage=({
     isFirstPage,

@@ -128,5 +128,61 @@ query($state:EventState){
   getEventNum(state:$state)
 }
 `
+export const GET_EVENT_BY_ID = gql`
+query($id:Int){
+  getEventById(id:$id){
+    name
+    location
+    host
+    info
+    id
+    state
+    result{
+      manGroup{
+        first
+        second
+        third
+        fourth
+      }
+      womanGroup{
+        first
+        second
+        third
+        fourth
+      }
+      manSingle{
+        first
+        second
+        third
+        fourth
+      }
+      womanSingle{
+        first
+        second
+        third
+        fourth
+      }
+      manDouble{
+        first
+        second
+        third
+        fourth
+      }
+      womanDouble{
+        first
+        second
+        third
+        fourth
+      }
+      mixDouble{
+        first
+        second
+        third
+        fourth
+      }
+    }
+  }
+}
+`
 
 

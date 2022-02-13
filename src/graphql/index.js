@@ -5,7 +5,8 @@ export {
     GET_RANK_DOUBLE_DATA,
     GET_COUNT,
     GET_EVENT,
-    GET_EVENT_NUM
+    GET_EVENT_NUM,
+    GET_EVENT_BY_ID
 } from './queries'
 
 

@@ -10,7 +10,7 @@ import Project from '../component/rank/rankProject';
 import RankMenu from '../component/rank/rankMenu';
 import SingleRank from '../component/rank/singleRank';
 import DoubleRank from '../component/rank/doubleRank';
-import ChangePage from '../component/rank/changePage';
+import ChangePage from '../component/changePage';
 
 const Rank=()=>{
     const rankTypeList = [
@@ -47,7 +47,7 @@ const Rank=()=>{
                 gender:rankTypeList[nowType].gender,
             }}
         )
-    const {loading:loadingNumber,data:number}=
+    const {loading:loadingNumber,data:number,refetch:refetchNumberData}=
         useQuery(GET_COUNT,{
             variables:{gender:rankTypeList[nowType].gender,type:rankTypeList[nowType].type}
         })
@@ -103,6 +103,7 @@ const Rank=()=>{
                 nowPage={nowPage}
                 refetchSingleData={refetchSingleData}
                 refetchDoubleData={refetchDoubleData}
+                refetchNumberData={refetchNumberData}
             />
             <RankMenu />
             

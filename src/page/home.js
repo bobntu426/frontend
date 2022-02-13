@@ -7,7 +7,7 @@ const Home=()=>{
         {
             name:'近期賽事',
             introduction:'近期即將舉辦的賽事總覽',
-            router:'/event'
+            router:'/eventList'
         },
         {
             name:'賽事成績',
