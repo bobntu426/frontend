@@ -17,8 +17,8 @@ const PlayerList=()=>{
         {chi:'女生',eng:'woman',gender:'female'},
     ]
     const [searchParams,setSearchParams]= useSearchParams()
-    const [nowGender,setGender] = useState(searchParams.get('gender')?searchParams.get('type'):'male')
-    const [nowPage,setPage] =useState(searchParams.get('page')?searchParams.get('page'):1)
+    const [nowGender,setGender] = useState(searchParams.get('gender'))
+    const [nowPage,setPage] =useState(searchParams.get('page'))
     const navigate = useNavigate()
     const [isFirstPage,setIsFirstPage] = useState(true)
     const [isLastPage,setIsLastPage] = useState(false)
@@ -35,10 +35,6 @@ const PlayerList=()=>{
             variables:{gender:nowGender,type:'single'}
         })
     useEffect(()=>{
-        if(!searchParams.get('gender')){
-            searchParams.set('gender','male')
-            setSearchParams(searchParams)
-        }
         setGender(searchParams.get('gender'))
     },[searchParams.get('gender')])
 
@@ -52,11 +48,6 @@ const PlayerList=()=>{
     },[data,number])
 
     useEffect(()=>{
-        if(!searchParams.get('page')){
-            searchParams.set('page',1)
-            setSearchParams(searchParams)
-        }
-        
         setPage(searchParams.get('page'))
         if(searchParams.get('page')==1)
             setIsFirstPage(true)
@@ -79,16 +70,17 @@ const PlayerList=()=>{
             <ListMenu />
             {loading?<p>loading</p>:
                 <>
-                <List
-                    data={data}
-                    navigate={navigate}
-                />
-                <ChangePage
-                    isFirstPage={isFirstPage}
-                    setSearchParams={setSearchParams}
-                    nowPage={nowPage}
-                    isLastPage={isLastPage}
-                />
+                    <List
+                        data={data}
+                        navigate={navigate}
+                    />
+                    <ChangePage
+                        isFirstPage={isFirstPage}
+                        setSearchParams={setSearchParams}
+                        nowPage={nowPage}
+                        isLastPage={isLastPage}
+                        searchParams={searchParams}
+                    />
                 </>
             }
             

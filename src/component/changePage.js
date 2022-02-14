@@ -4,7 +4,8 @@ const ChangePage=({
     isFirstPage,
     setSearchParams,
     nowPage,
-    isLastPage
+    isLastPage,
+    searchParams
 })=>{
     return(
         <RowFlexdiv>
@@ -12,7 +13,8 @@ const ChangePage=({
                     variant="outlined"
                     disabled={isFirstPage}
                     onClick={()=>{
-                        setSearchParams({page:parseInt(nowPage)-1})
+                        searchParams.set('page',parseInt(nowPage)-1)
+                        setSearchParams(searchParams)
                     }}
                     style={{
                         position:'relative',
@@ -25,7 +27,8 @@ const ChangePage=({
                     variant="outlined"
                     disabled={isLastPage}
                     onClick={()=>{
-                        setSearchParams({page:parseInt(nowPage)+1})
+                        searchParams.set('page',parseInt(nowPage)+1)
+                        setSearchParams(searchParams)
                     }}
                     style={{
                         position:'relative',

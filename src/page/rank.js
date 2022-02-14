@@ -23,8 +23,8 @@ const Rank=()=>{
 
     const [searchParams,setSearchParams]= useSearchParams()
 
-    const [nowPage,setPage] =useState(searchParams.get('page')?searchParams.get('page'):1)
-    const [nowType,setType] =useState(searchParams.get('type')?searchParams.get('type'):0)
+    const [nowPage,setPage] =useState(searchParams.get('page'))
+    const [nowType,setType] =useState(searchParams.get('type'))
    
    
     const navigate = useNavigate()
@@ -34,8 +34,8 @@ const Rank=()=>{
     const {loading:singleDataLoading,data:singleData,refetch:refetchSingleData}=
         useQuery(GET_RANK_SINGLE_DATA,{
             variables:{
-                minimum:nowPage*20-19,
-                maximum:nowPage*20,
+                minimum:nowPage*10-9,
+                maximum:nowPage*10,
                 gender:rankTypeList[nowType].gender,
             }}
         )
@@ -69,11 +69,6 @@ const Rank=()=>{
     },[singleData,doubleData,number])
 
     useEffect(()=>{
-        if(!searchParams.get('page')){
-            searchParams.set('page',1)
-            setSearchParams(searchParams)
-        }
-        
         setPage(searchParams.get('page'))
         if(searchParams.get('page')==1)
             setIsFirstPage(true)
@@ -82,10 +77,6 @@ const Rank=()=>{
     },[searchParams.get('page')])
     
     useEffect(()=>{
-        if(!searchParams.get('type')){
-            searchParams.set('type',0)
-            setSearchParams(searchParams)
-        }
         setType(searchParams.get('type'))
     },[searchParams.get('type')])
 
@@ -127,6 +118,7 @@ const Rank=()=>{
                     setSearchParams={setSearchParams}
                     nowPage={nowPage}
                     isLastPage={isLastPage}
+                    searchParams={searchParams}
                 />
             </>)}
             

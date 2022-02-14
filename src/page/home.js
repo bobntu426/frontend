@@ -17,12 +17,12 @@ const Home=()=>{
         {
             name:'選手專區',
             introduction:'選手資訊查詢',
-            router:'/playerList?page=1'
+            router:'/playerList?page=1&gender=male'
         },
         {
             name:'排名',
             introduction:'選手在各種項目的排名',
-            router:'/ranking'
+            router:'/ranking?page=1&type=0'
         },
         {
             name:'新聞',
