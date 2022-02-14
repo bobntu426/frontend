@@ -16,7 +16,10 @@ const EventList=()=>{
 
     return (
         <PageDiv>
-            <ColumnFlexDiv>
+            <ColumnFlexDiv style={{
+                marginTop:'5vw',
+                marginBottom:'2vw',
+            }}>
                 {loading?<p>loading</p>:
                 (typeof(data)==undefined)?<p>None</p>:
                 <>
