@@ -1,138 +1,135 @@
 
 import { useQuery } from 'react-apollo'
-import { GET_TWENTY_PERSON,GET_ALL_PEOPLE_NUM } from '../graphql'
+import { GET_RANK_SINGLE_DATA,GET_COUNT,GET_RANK_DOUBLE_DATA } from '../graphql'
 import { useNavigate} from 'react-router-dom';
-import {PageDiv,SmallFlexDiv,ColumnFlexDiv,RowFlexdiv} from '../styleComponent'
-import Button from '@mui/material/Button';
+import {PageDiv,ColumnFlexDiv} from '../styleComponent'
+
 import {useSearchParams} from "react-router-dom"
 import { useEffect, useState } from 'react';
+import Project from '../component/rank/rankProject';
+import RankMenu from '../component/rank/rankMenu';
+import SingleRank from '../component/rank/singleRank';
+import DoubleRank from '../component/rank/doubleRank';
+import ChangePage from '../component/changePage';
 
 const Rank=()=>{
+    const rankTypeList = [
+        {chi:'男子單打',eng:'manSingle',gender:'male',type:'single'},
+        {chi:'女子單打',eng:'womanSingle',gender:'female',type:'single'},
+        {chi:'男子雙打',eng:'manDouble',gender:'male',type:'double'},
+        {chi:'女子雙打',eng:'womanDouble',gender:'female',type:'double'},
+        {chi:'混合雙打',eng:'mixDouble',gender:'mix',type:'double'},
+    ]
+
     const [searchParams,setSearchParams]= useSearchParams()
-    const [nowPage,setPage] =useState(searchParams.get('page'))
+
+    const [nowPage,setPage] =useState(searchParams.get('page')?searchParams.get('page'):1)
+    const [nowType,setType] =useState(searchParams.get('type')?searchParams.get('type'):0)
    
    
     const navigate = useNavigate()
     const [isFirstPage,setIsFirstPage] = useState(true)
     const [isLastPage,setIsLastPage] = useState(false)
 
-    const {loading,data,refetch}=useQuery(GET_TWENTY_PERSON,{variables:{minimum:nowPage*20-19,maximum:nowPage*20}})
-    const {loading:loadingAllPeopleNum,data:allPeopleNum}=useQuery(GET_ALL_PEOPLE_NUM)
+    const {loading:singleDataLoading,data:singleData,refetch:refetchSingleData}=
+        useQuery(GET_RANK_SINGLE_DATA,{
+            variables:{
+                minimum:nowPage*20-19,
+                maximum:nowPage*20,
+                gender:rankTypeList[nowType].gender,
+            }}
+        )
+    const {loading:doubleDataLoading,data:doubleData,refetch:refetchDoubleData}=
+        useQuery(GET_RANK_DOUBLE_DATA,{
+            variables:{
+                minimum:nowPage*10-9,
+                maximum:nowPage*10,
+                gender:rankTypeList[nowType].gender,
+            }}
+        )
+    const {loading:loadingNumber,data:number,refetch:refetchNumberData}=
+        useQuery(GET_COUNT,{
+            variables:{gender:rankTypeList[nowType].gender,type:rankTypeList[nowType].type}
+        })
+    
 
     useEffect(()=>{
-        if(data&&allPeopleNum){
-            if(data.getTwentyPeople.at(-1).rank==allPeopleNum.getAllPeopleNum)
+        if(singleData&&number&&rankTypeList[nowType].type=='single'){
+            if(singleData.getRankSingleData.at(-1).rank==number.getCount)
                 setIsLastPage(true)
             else
                 setIsLastPage(false)
         }
-    },[data,allPeopleNum])
+        if(doubleData&&number&&rankTypeList[nowType].type=='double'){
+            if(doubleData.getRankDoubleData.at(-1).rank==number.getCount)
+                setIsLastPage(true)
+            else
+                setIsLastPage(false)
+        }
+    },[singleData,doubleData,number])
 
     useEffect(()=>{
+        if(!searchParams.get('page')){
+            searchParams.set('page',1)
+            setSearchParams(searchParams)
+        }
+        
         setPage(searchParams.get('page'))
         if(searchParams.get('page')==1)
             setIsFirstPage(true)
         else
             setIsFirstPage(false)
     },[searchParams.get('page')])
+    
+    useEffect(()=>{
+        if(!searchParams.get('type')){
+            searchParams.set('type',0)
+            setSearchParams(searchParams)
+        }
+        setType(searchParams.get('type'))
+    },[searchParams.get('type')])
 
 
     return (
-    loading||loadingAllPeopleNum?<p>loading</p>:
+    
     <PageDiv>
         <ColumnFlexDiv>
-            <div style={{
-                width: '100%',
-                display: 'flex',
-                borderBottom:'solid 2px rgb(181, 207, 29)'
-            }}>
-                <SmallFlexDiv style={{
-                    flex: '0.2'
-                }}>
-                    <p>排名</p>
-                </SmallFlexDiv>
-
-                <SmallFlexDiv>
-                    <p>名字</p>
-                </SmallFlexDiv>
-
-                <SmallFlexDiv>
-                    <p>學校</p>
-                </SmallFlexDiv>
-                
-                <SmallFlexDiv>
-                    <p>積分</p>
-                </SmallFlexDiv>
-
-            </div>
+            
+            <Project 
+                rankTypeList={rankTypeList}
+                nowType={nowType}
+                searchParams={searchParams}
+                setSearchParams={setSearchParams}
+                nowPage={nowPage}
+                refetchSingleData={refetchSingleData}
+                refetchDoubleData={refetchDoubleData}
+                refetchNumberData={refetchNumberData}
+            />
+            <RankMenu />
             
                 
-               
-            {    
-                data.getTwentyPeople.map((person,index)=>{
-
-                    return(
-                        <div 
-                            style={{
-                                width: '100%',
-                                display: 'flex',
-                                borderBottom:'solid 2px rgb(181, 207, 29)',
-                                cursor:'pointer',
-                            }}
-                            onMouseOver={(e)=>{e.currentTarget.style.backgroundColor='#c5d1dd'}}
-                            onMouseOut={(e)=>{e.currentTarget.style.backgroundColor='white'}}
-                            onClick={()=>{navigate(`/player?playerId=${person.id}`)}}
-                            key={index}
-                        >
-                            <SmallFlexDiv style={{
-                                flex: '0.2'
-                            }}>
-                                <p>{person.rank}</p>
-                            </SmallFlexDiv>
-
-                            <SmallFlexDiv>
-                                <p>{person.name}</p>
-                            </SmallFlexDiv>
-
-                            <SmallFlexDiv>
-                                <p>{person.school}</p>
-                            </SmallFlexDiv>
-
-                            <SmallFlexDiv>
-                                <p>{person.score}</p>
-                            </SmallFlexDiv>
-                        </div>
-                    )
-                })
-            }
-            <RowFlexdiv>
-                <Button 
-                    variant="outlined"
-                    disabled={isFirstPage}
-                    onClick={()=>{
-                        setSearchParams({page:parseInt(nowPage)-1})
-                    }}
-                    style={{
-                        position:'relative',
-                        bottom:'-5vh'
-                    }}
-                >
-                    上一頁
-                </Button>
-                <Button 
-                    variant="outlined"
-                    disabled={isLastPage}
-                    onClick={()=>{
-                        setSearchParams({page:parseInt(nowPage)+1})
-                    }}
-                    style={{
-                        position:'relative',
-                        bottom:'-5vh'
-                    }}
-                >
-                    下一頁
-                </Button>
-            </RowFlexdiv>
+            {singleDataLoading||loadingNumber||doubleDataLoading?<p>loading</p>:(
+            <>
+                {rankTypeList[nowType].type=='single'?
+                    <SingleRank 
+                        singleData={singleData}
+                        navigate={navigate}
+                    />:
+                    <DoubleRank 
+                        doubleData={doubleData}
+                        navigate={navigate}
+                    />
+                }
+                    
+                
+                <ChangePage
+                    isFirstPage={isFirstPage}
+                    setSearchParams={setSearchParams}
+                    nowPage={nowPage}
+                    isLastPage={isLastPage}
+                />
+            </>)}
+            
         </ColumnFlexDiv>
     </PageDiv>
     )

@@ -20,6 +20,7 @@ import {
   Link,
   Outlet,
 } from 'react-router-dom'
+import EventList from './page/eventList'
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
       <Routes>
         <Route element={<Home />} path="/" />
         <Route element={<Event />} path="/event" />
+        <Route element={<EventList />} path="/eventList" />
         <Route element={<Login />} path="/login" />
         <Route element={<News />} path="/news" />
         <Route element={<PlayerList />} path="/playerList" />

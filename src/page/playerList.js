@@ -1,84 +1,95 @@
 
 import { useQuery } from 'react-apollo'
-import { GET_ALL_PEOPLE } from '../graphql'
+import { GET_COUNT,GET_RANK_SINGLE_DATA } from '../graphql'
 import { useNavigate} from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import {PageDiv,SmallFlexDiv,ColumnFlexDiv} from '../styleComponent'
+import {useSearchParams} from "react-router-dom"
+import ListMenu from '../component/playeList/listMenu';
+import ListProject from '../component/playeList/listProject';
+import List from '../component/playeList/list';
+import ChangePage from '../component/changePage';
+
 
 const PlayerList=()=>{
-    const {loading,data}=useQuery(GET_ALL_PEOPLE)
+    const rankTypeList = [
+        {chi:'男生',eng:'man',gender:'male'},
+        {chi:'女生',eng:'woman',gender:'female'},
+    ]
+    const [searchParams,setSearchParams]= useSearchParams()
+    const [nowGender,setGender] = useState(searchParams.get('gender')?searchParams.get('type'):'male')
+    const [nowPage,setPage] =useState(searchParams.get('page')?searchParams.get('page'):1)
     const navigate = useNavigate()
+    const [isFirstPage,setIsFirstPage] = useState(true)
+    const [isLastPage,setIsLastPage] = useState(false)
+    const {loading,data,refetch}=
+        useQuery(GET_RANK_SINGLE_DATA,{
+            variables:{
+                minimum:nowPage*20-19,
+                maximum:nowPage*20,
+                gender:nowGender,
+            }}
+        )
+    const {loading:loadingNumber,data:number,refetch:refetchNumberData}=
+        useQuery(GET_COUNT,{
+            variables:{gender:nowGender,type:'single'}
+        })
+    useEffect(()=>{
+        if(!searchParams.get('gender')){
+            searchParams.set('gender','male')
+            setSearchParams(searchParams)
+        }
+        setGender(searchParams.get('gender'))
+    },[searchParams.get('gender')])
+
+    useEffect(()=>{
+        if(data&&number){
+            if(data.getRankSingleData.at(-1).rank==number.getCount)
+                setIsLastPage(true)
+            else
+                setIsLastPage(false)
+        }
+    },[data,number])
+
+    useEffect(()=>{
+        if(!searchParams.get('page')){
+            searchParams.set('page',1)
+            setSearchParams(searchParams)
+        }
+        
+        setPage(searchParams.get('page'))
+        if(searchParams.get('page')==1)
+            setIsFirstPage(true)
+        else
+            setIsFirstPage(false)
+    },[searchParams.get('page')])
     return (
-    loading?<p>loading</p>:
+    
     <PageDiv>
         <ColumnFlexDiv>
-            <div style={{
-                display: 'flex',
-                width: '100%',
-                borderBottom:'solid 2px rgb(181, 207, 29)'
-            }}>
-                <SmallFlexDiv>
-                    <p>名字</p>
-                </SmallFlexDiv>
-
-                <SmallFlexDiv>
-                    <p>學校</p>
-                </SmallFlexDiv>
-
-                <SmallFlexDiv>
-                    <p>性別</p>
-                </SmallFlexDiv>
-                
-                <SmallFlexDiv>
-                    <p>排名</p>
-                </SmallFlexDiv>
-
-                <SmallFlexDiv>
-                    <p>熱門度</p>
-                </SmallFlexDiv>
-
-            </div>
-
-            {    
-                data.getAllPeople.map((person,index)=>{
-                    return(
-                        <div 
-                            style={{
-                                display: 'flex',
-                                borderBottom:'solid 2px rgb(181, 207, 29)',
-                                cursor:'pointer',
-                                width: '100%',
-                            }}
-                            onMouseOver={(e)=>{e.currentTarget.style.backgroundColor='#c5d1dd'}}
-                            onMouseOut={(e)=>{e.currentTarget.style.backgroundColor='white'}}
-                            onClick={()=>{navigate(`/player?playerId=${person.id}`)}}
-                            key={index}
-                        >
-                            <SmallFlexDiv>
-                                <p>{person.name}</p>
-                            </SmallFlexDiv>
-
-                            <SmallFlexDiv>
-                                <p>{person.school}</p>
-                            </SmallFlexDiv>
-
-                            <SmallFlexDiv>
-                            {
-                                person.gender=='male'?
-                                <p>男</p>:<p>女</p>
-                            }
-                            </SmallFlexDiv>
-
-                            <SmallFlexDiv >
-                                <p>{index+1}</p>
-                            </SmallFlexDiv>
-
-                            <SmallFlexDiv>
-                                <p>{person.popular}</p>
-                            </SmallFlexDiv>
-
-                        </div>
-                    )
-                })
+            <ListProject 
+                rankTypeList={rankTypeList}
+                nowGender={nowGender}
+                searchParams={searchParams}
+                setSearchParams={setSearchParams}
+                nowPage={nowPage}
+                refetch={refetch}
+                refetchNumberData={refetchNumberData}
+            />
+            <ListMenu />
+            {loading?<p>loading</p>:
+                <>
+                <List
+                    data={data}
+                    navigate={navigate}
+                />
+                <ChangePage
+                    isFirstPage={isFirstPage}
+                    setSearchParams={setSearchParams}
+                    nowPage={nowPage}
+                    isLastPage={isLastPage}
+                />
+                </>
             }
             
         </ColumnFlexDiv>

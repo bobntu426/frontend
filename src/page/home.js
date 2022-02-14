@@ -7,7 +7,7 @@ const Home=()=>{
         {
             name:'近期賽事',
             introduction:'近期即將舉辦的賽事總覽',
-            router:'/event'
+            router:'/eventList'
         },
         {
             name:'賽事成績',
@@ -22,7 +22,7 @@ const Home=()=>{
         {
             name:'排名',
             introduction:'選手在各種項目的排名',
-            router:'/ranking?page=1'
+            router:'/ranking'
         },
         {
             name:'新聞',
