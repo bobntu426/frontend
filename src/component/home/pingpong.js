@@ -10,7 +10,7 @@ const Pingpong=({content,color})=>{
                 justifyContent:'center',
                 cursor:'pointer',
                 height: '15vw',
-                top:'10vh',
+                
                 minHeight: '100px',
                 
             }}

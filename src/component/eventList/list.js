@@ -7,7 +7,7 @@ const List=({
 })=>{
     useEffect(()=>{
         console.log(data)
-    }, data)
+    }, [data])
     
     return(
         data.getEvent.map((event,index)=>{

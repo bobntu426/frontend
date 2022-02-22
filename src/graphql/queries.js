@@ -66,8 +66,8 @@ query($gender:Gender,$type:NumberType){
 `
 
 export const GET_EVENT = gql`
-  query($state:EventState){
-    getEvent(state:$state){
+  query($state:EventState,$name:String,$schoolId:Int,$eventId:Int){
+    getEvent(state:$state,name:$name,schoolId:$schoolId,eventId:$eventId){
       name
       date
       location

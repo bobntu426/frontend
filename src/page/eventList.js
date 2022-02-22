@@ -12,7 +12,7 @@ const EventList=()=>{
     const navigate = useNavigate()
     useEffect(()=>{
         console.log(data)
-    }, data)
+    }, [data])
 
     return (
         <PageDiv>

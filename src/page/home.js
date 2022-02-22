@@ -50,6 +50,7 @@ const Home=()=>{
             <h2>簡介</h2>
             <p>統整大專界一般組的各大盃賽資訊以及各選手的資訊</p>
         </ColumnFlexDiv>
+        <div style={{height:'10vw'}}></div>
         <RowFlexdiv>
             <Pingpong content={pingpongList[0]} color={'white'}/>
             <Pingpong content={pingpongList[1]} color={'orange'}/>
