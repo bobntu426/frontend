@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
@@ -10,7 +11,7 @@ import { useNavigate} from 'react-router-dom';
 
 const pages = [
   {name:'近期賽事',router:'/eventList'}, 
-  {name:'賽事成績', router:'/result'}, 
+  {name:'賽事成績', router:'/resultList'}, 
   {name:'選手專區',router:'/playerList?page=1&gender=male'}, 
   {name:'各校球隊',router:'/SchoolList?page=1'}, 
   {name:'排名',router:'/ranking?page=1&type=0'}, 
@@ -20,8 +21,8 @@ const pages = [
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const navigate = useNavigate();
 

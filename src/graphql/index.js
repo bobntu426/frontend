@@ -6,7 +6,9 @@ export {
     GET_COUNT,
     GET_EVENT,
     GET_EVENT_NUM,
-    GET_EVENT_BY_ID
+    GET_EVENT_BY_ID,
+    GET_SCHOOL,
+    GET_SCHOOL_NUM
 } from './queries'
 
 

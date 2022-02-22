@@ -75,6 +75,8 @@ export const GET_EVENT = gql`
       info
       id
       state
+      age
+      schoolId
       result{
         manGroup{
           first
@@ -128,6 +130,21 @@ query($state:EventState){
   getEventNum(state:$state)
 }
 `
+export const GET_SCHOOL = gql`
+query($mustHasEvent:Boolean){
+  getSchool(mustHasEvent:$mustHasEvent){
+    name
+    id
+    eventName
+    record
+  }
+}
+`
+export const GET_SCHOOL_NUM = gql`
+query($mustHasEvent:Boolean){
+  getSchoolNum(mustHasEvent:$mustHasEvent)
+}
+`
 export const GET_EVENT_BY_ID = gql`
 query($id:Int){
   getEventById(id:$id){
@@ -136,6 +153,8 @@ query($id:Int){
     host
     info
     id
+    age
+    schoolId
     state
     result{
       manGroup{

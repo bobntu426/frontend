@@ -13,16 +13,14 @@ import School from './page/school'
 import SchoolList from './page/schoolList'
 
 import Menu from './menu/menu'
-import styled from 'styled-components'
 
 import {
-  BrowserRouter as Router,
+
   Routes,
   Route,
-  Link,
-  Outlet,
 } from 'react-router-dom'
 import EventList from './page/eventList'
+import ResultList from './page/resultList'
 
 
 function App() {
@@ -47,6 +45,7 @@ function App() {
         <Route element={<PlayerList />} path="/playerList" />
         <Route element={<Player />} path="/player" />
         <Route element={<Rank />} path="/ranking" />
+        <Route element={<ResultList />} path="/resultList" />
         <Route element={<Result />} path="/result" />
         <Route element={<Video />} path="/video" />
         <Route element={<School />} path="/school" />

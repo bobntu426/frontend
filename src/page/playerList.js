@@ -5,9 +5,9 @@ import { useNavigate} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import {PageDiv,SmallFlexDiv,ColumnFlexDiv} from '../styleComponent'
 import {useSearchParams} from "react-router-dom"
-import ListMenu from '../component/playeList/listMenu';
-import ListProject from '../component/playeList/listProject';
-import List from '../component/playeList/list';
+import ListMenu from '../component/playerList/listMenu';
+import ListProject from '../component/playerList/listProject';
+import List from '../component/playerList/list';
 import ChangePage from '../component/changePage';
 
 

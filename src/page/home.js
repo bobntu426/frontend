@@ -1,4 +1,4 @@
-import { style } from '@mui/system'
+
 import Pingpong from '../component/home/pingpong.js'
 
 import {PageDiv,RowFlexdiv,ColumnFlexDiv} from '../styleComponent'
@@ -13,7 +13,7 @@ const Home=()=>{
         {
             name:'賽事成績',
             introduction:'過去的賽事成績一覽',
-            router:'/result'
+            router:'/resultList'
         },
         {
             name:'選手專區',
