@@ -1,3 +1,4 @@
+import { style } from '@mui/system'
 import Pingpong from '../component/home/pingpong.js'
 
 import {PageDiv,RowFlexdiv,ColumnFlexDiv} from '../styleComponent'
@@ -18,6 +19,11 @@ const Home=()=>{
             name:'選手專區',
             introduction:'選手資訊查詢',
             router:'/playerList?page=1&gender=male'
+        },
+        {
+            name:'各校球隊',
+            introduction:'各所學校的球隊資訊一覽',
+            router:'/schoolList?page=1'
         },
         {
             name:'排名',
@@ -49,8 +55,12 @@ const Home=()=>{
             <Pingpong content={pingpongList[1]} color={'orange'}/>
             <Pingpong content={pingpongList[2]} color={'white'}/>
             <Pingpong content={pingpongList[3]} color={'orange'}/>
+        </RowFlexdiv>
+
+        <RowFlexdiv>
             <Pingpong content={pingpongList[4]} color={'white'}/>
             <Pingpong content={pingpongList[5]} color={'orange'}/>
+            <Pingpong content={pingpongList[6]} color={'white'}/>
         </RowFlexdiv>
     </PageDiv>
     )

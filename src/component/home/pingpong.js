@@ -10,8 +10,9 @@ const Pingpong=({content,color})=>{
                 justifyContent:'center',
                 cursor:'pointer',
                 height: '15vw',
-                top:'20vh',
-                minHeight: '100px'
+                top:'10vh',
+                minHeight: '100px',
+                
             }}
             onClick={()=>{navigate(content.router)}}
             onMouseOver={()=>{}}

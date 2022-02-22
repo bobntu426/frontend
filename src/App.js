@@ -9,6 +9,8 @@ import Player from './page/player'
 import Rank from './page/rank'
 import Result from './page/result'
 import Video from './page/video'
+import School from './page/school'
+import SchoolList from './page/schoolList'
 
 import Menu from './menu/menu'
 import styled from 'styled-components'
@@ -47,6 +49,8 @@ function App() {
         <Route element={<Rank />} path="/ranking" />
         <Route element={<Result />} path="/result" />
         <Route element={<Video />} path="/video" />
+        <Route element={<School />} path="/school" />
+        <Route element={<SchoolList />} path="/schoolList" />
       </Routes>
     </>
   )
