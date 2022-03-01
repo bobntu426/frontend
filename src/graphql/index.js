@@ -10,6 +10,9 @@ export {
     GET_SCHOOL,
     GET_SCHOOL_NUM
 } from './queries'
+export { 
+    CHECK_PASSWORD
+} from './mutations'
 
 
 

@@ -1,5 +1,16 @@
 import { gql } from 'apollo-boost';
 
-export const INIT_SAMPLE_PEOPLE = gql`
-    initSamplePeople{}
-`;
+
+export const CHECK_PASSWORD = gql`
+mutation checkPassword(
+    $name: String
+    $password: String
+    ){  
+        checkPassword(
+            name:$name
+            password:$password
+        ){
+            name
+            success
+        }
+    }`

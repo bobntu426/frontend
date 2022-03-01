@@ -34,16 +34,16 @@ const Rank=()=>{
     const {loading:singleDataLoading,data:singleData,refetch:refetchSingleData}=
         useQuery(GET_RANK_SINGLE_DATA,{
             variables:{
-                minimum:nowPage*10-9,
-                maximum:nowPage*10,
+                minimum:nowPage*15-14,
+                maximum:nowPage*15,
                 gender:rankTypeList[nowType].gender,
             }}
         )
     const {loading:doubleDataLoading,data:doubleData,refetch:refetchDoubleData}=
         useQuery(GET_RANK_DOUBLE_DATA,{
             variables:{
-                minimum:nowPage*10-9,
-                maximum:nowPage*10,
+                minimum:nowPage*15-14,
+                maximum:nowPage*15,
                 gender:rankTypeList[nowType].gender,
             }}
         )

@@ -41,6 +41,7 @@ const Home=()=>{
             router:'/video'
         },
     ]
+    
     return(
     <PageDiv>
         <ColumnFlexDiv style={{
