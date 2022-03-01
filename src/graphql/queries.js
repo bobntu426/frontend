@@ -2,8 +2,8 @@ import { gql } from 'apollo-boost';
 import { Query } from 'react-apollo';
 
 export const GET_PEOPLE = gql`
-  query($gender:Gender) {
-    getPeople(gender:$gender){
+  query($gender:Gender,$accountId:Int) {
+    getPeople(gender:$gender,accountId:$accountId){
       name
       score
       school
@@ -66,8 +66,8 @@ query($gender:Gender,$type:NumberType){
 `
 
 export const GET_EVENT = gql`
-  query($state:EventState,$name:String,$schoolId:Int,$eventId:Int){
-    getEvent(state:$state,name:$name,schoolId:$schoolId,eventId:$eventId){
+  query($state:EventState,$name:String,$schoolId:Int,$eventId:Int,$accountId:Int){
+    getEvent(state:$state,name:$name,schoolId:$schoolId,eventId:$eventId,accountId:$accountId){
       name
       date
       location
@@ -131,8 +131,8 @@ query($state:EventState){
 }
 `
 export const GET_SCHOOL = gql`
-query($mustHasEvent:Boolean){
-  getSchool(mustHasEvent:$mustHasEvent){
+query($mustHasEvent:Boolean,$accountId:Int){
+  getSchool(mustHasEvent:$mustHasEvent,accountId:$accountId){
     name
     id
     eventName

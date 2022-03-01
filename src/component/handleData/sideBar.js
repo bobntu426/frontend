@@ -20,7 +20,7 @@ const HandleData=()=>{
 
             
         }}>
-            {data.map((d)=>
+            {data.map((d,index)=>
                 <SmallFlexDiv
                 style={{
                     position:'relative',
@@ -34,6 +34,7 @@ const HandleData=()=>{
                     setSearchParams(searchParams)
                 }}
                 onMouseOver={()=>{}}
+                key={index}
             >
     
                 <img 

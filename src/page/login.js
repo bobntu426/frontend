@@ -32,7 +32,7 @@ const Login = ({
     const [checkPasswordMutation] = useMutation(CHECK_PASSWORD,
         {
             onCompleted: ({checkPassword}) => {
-                if (checkPassword){
+                if (checkPassword.success){
                     console.log(checkPassword)
                     setIsAdministrator(true)
                     setUser(checkPassword.name)
