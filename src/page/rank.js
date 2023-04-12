@@ -55,12 +55,14 @@ const Rank=()=>{
 
     useEffect(()=>{
         if(singleData&&number&&rankTypeList[nowType].type=='single'){
+            if(singleData.getRankSingleData.length!=0)
             if(singleData.getRankSingleData.at(-1).rank==number.getCount)
                 setIsLastPage(true)
             else
                 setIsLastPage(false)
         }
         if(doubleData&&number&&rankTypeList[nowType].type=='double'){
+            if(doubleData.getRankDoubleData.length!=0)
             if(doubleData.getRankDoubleData.at(-1).rank==number.getCount)
                 setIsLastPage(true)
             else
@@ -100,8 +102,10 @@ const Rank=()=>{
             
                 
             {singleDataLoading||loadingNumber||doubleDataLoading?<p>loading</p>:(
+            
             <>
                 {rankTypeList[nowType].type=='single'?
+                    
                     <SingleRank 
                         singleData={singleData}
                         navigate={navigate}

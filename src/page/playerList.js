@@ -40,10 +40,11 @@ const PlayerList=()=>{
 
     useEffect(()=>{
         if(data&&number){
-            if(data.getRankSingleData.at(-1).rank==number.getCount)
-                setIsLastPage(true)
-            else
-                setIsLastPage(false)
+            if(data.getRankSingleData.length!=0)
+                if(data.getRankSingleData.at(-1).rank==number.getCount)
+                    setIsLastPage(true)
+                else
+                    setIsLastPage(false)
         }
     },[data,number])
 
@@ -70,17 +71,20 @@ const PlayerList=()=>{
             <ListMenu />
             {loading?<p>loading</p>:
                 <>
-                    <List
-                        data={data}
-                        navigate={navigate}
-                    />
-                    <ChangePage
-                        isFirstPage={isFirstPage}
-                        setSearchParams={setSearchParams}
-                        nowPage={nowPage}
-                        isLastPage={isLastPage}
-                        searchParams={searchParams}
-                    />
+                    {data.getRankSingleData.length==0?<p>查無資料</p>:
+                    <>
+                        <List
+                            data={data}
+                            navigate={navigate}
+                        />
+                        <ChangePage
+                            isFirstPage={isFirstPage}
+                            setSearchParams={setSearchParams}
+                            nowPage={nowPage}
+                            isLastPage={isLastPage}
+                            searchParams={searchParams}
+                        />
+                    </>}
                 </>
             }
             

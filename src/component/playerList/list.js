@@ -3,6 +3,7 @@ const List=({
     data,
     navigate,
 })=>{
+    console.log(data)
     return(
             
         data.getRankSingleData.map((person,index)=>{

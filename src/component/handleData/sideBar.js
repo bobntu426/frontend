@@ -13,12 +13,12 @@ const HandleData=()=>{
     return (
 
         <ColumnFlexDiv style={{
+            position:'relative',
             width:'200px',
             backgroundColor:'grey',
             height: '700px',
             minHeight: '500px',
-
-            
+            left:0
         }}>
             {data.map((d,index)=>
                 <SmallFlexDiv

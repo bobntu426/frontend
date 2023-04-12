@@ -1,19 +1,22 @@
 import * as React from 'react';
-import FilledInput from '@mui/material/FilledInput';
-
-import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
 import { ColumnFlexDiv, PageDiv, RowFlexdiv, SmallFlexDiv } from '../styleComponent';
 import SideBar from '../component/handleData/sideBar'
+import InputData from '../component/handleData/inputData';
+import SelectData from '../component/handleData/selectData';
+import { GET_SCHOOL } from '../graphql/queries';
+import { useQuery } from 'react-apollo';
+import InputDate from '../component/handleData/inputDate';
 
 export default function InputAdornments() {
   const [values, setValues] = React.useState({
     name: '',
     gender: '',
     school: '',
+    hand: '',
+    playType: '',
+    birthday: '',
   });
-
+  const {data:schoolList,loading:loadSchool} = useQuery(GET_SCHOOL)
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -22,42 +25,21 @@ export default function InputAdornments() {
   return (
     <PageDiv>
         <RowFlexdiv>
-            <SideBar />
-            <ColumnFlexDiv style={{overflow:'auto'}}>
-                <div>
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
-                    <FilledInput
-                        id="filled-adornment-weight"
-                        value={values.name}
-                        onChange={handleChange('name')}
-                        endAdornment={<InputAdornment position="end"></InputAdornment>}
-                    />
-                    <FormHelperText id="filled-weight-helper-text">姓名</FormHelperText>
-                    </FormControl>
-                </div>
-                <div>
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
-                    <FilledInput
-                        id="filled-adornment-weight"
-                        value={values.weight}
-                        onChange={handleChange('school')}
-                        endAdornment={<InputAdornment position="end"></InputAdornment>}
-                    />
-                    <FormHelperText id="filled-weight-helper-text">學校</FormHelperText>
-                    </FormControl>
-                </div>
-                <div>
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
-                    <FilledInput
-                        id="filled-adornment-weight"
-                        value={values.weight}
-                        onChange={handleChange('gender')}
-                        endAdornment={<InputAdornment position="end"></InputAdornment>}
-                    />
-                    <FormHelperText id="filled-weight-helper-text">性別</FormHelperText>
-                    </FormControl>
-                </div>
-        </ColumnFlexDiv>
+            <SideBar/>
+            {loadSchool?<p>loading</p>:
+              <div style={{
+                  position: 'relative',
+                  border: 'solid 2px rgb(181, 207, 29)',
+                  flex:1,
+                  marginLeft:'10vw',
+                  marginRight:'10vw',
+                  height: '450px'
+                }}>
+                <InputData values={values} handleChange={handleChange}/>
+                <SelectData values={values} handleChange={handleChange} schoolList={schoolList} />
+                <InputDate />
+              </div>
+            }
       </RowFlexdiv>
     </PageDiv>
     
