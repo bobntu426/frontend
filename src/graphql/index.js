@@ -11,7 +11,8 @@ export {
     GET_SCHOOL_NUM
 } from './queries'
 export { 
-    CHECK_PASSWORD
+    CHECK_PASSWORD,
+    CREATE_PERSON
 } from './mutations'
 
 

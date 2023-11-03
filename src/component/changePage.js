@@ -1,4 +1,4 @@
-import {RowFlexdiv} from "../styleComponent"
+import {RowFlexDiv} from "../styleComponent"
 import Button from '@mui/material/Button';
 const ChangePage=({
     isFirstPage,
@@ -8,7 +8,7 @@ const ChangePage=({
     searchParams
 })=>{
     return(
-        <RowFlexdiv>
+        <RowFlexDiv>
                 <Button 
                     variant="outlined"
                     disabled={isFirstPage}
@@ -37,7 +37,7 @@ const ChangePage=({
                 >
                     下一頁
                 </Button>
-            </RowFlexdiv>
+            </RowFlexDiv>
     )
 }
 export default ChangePage

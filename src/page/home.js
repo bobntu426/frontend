@@ -1,7 +1,7 @@
 
 import Pingpong from '../component/home/pingpong.js'
 
-import {PageDiv,RowFlexdiv,ColumnFlexDiv} from '../styleComponent'
+import {PageDiv,RowFlexDiv,ColumnFlexDiv} from '../styleComponent'
 const Home=()=>{
     
     const pingpongList=[
@@ -52,18 +52,18 @@ const Home=()=>{
             <p>統整大專界一般組的各大盃賽資訊以及各選手的資訊</p>
         </ColumnFlexDiv>
         <div style={{height:'10vw'}}></div>
-        <RowFlexdiv>
+        <RowFlexDiv>
             <Pingpong content={pingpongList[0]} color={'white'}/>
             <Pingpong content={pingpongList[1]} color={'orange'}/>
             <Pingpong content={pingpongList[2]} color={'white'}/>
             <Pingpong content={pingpongList[3]} color={'orange'}/>
-        </RowFlexdiv>
+        </RowFlexDiv>
 
-        <RowFlexdiv>
+        <RowFlexDiv>
             <Pingpong content={pingpongList[4]} color={'white'}/>
             <Pingpong content={pingpongList[5]} color={'orange'}/>
             <Pingpong content={pingpongList[6]} color={'white'}/>
-        </RowFlexdiv>
+        </RowFlexDiv>
     </PageDiv>
     )
 }

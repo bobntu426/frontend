@@ -1,4 +1,4 @@
-import { Blockdiv } from "../../styleComponent"
+import { BlockDiv } from "../../styleComponent"
 import { useEffect, useState } from 'react';
 
 const List=({
@@ -23,10 +23,10 @@ const List=({
                     onClick={()=>{navigate(`/event?eventId=${event.id}`)}}
                     key={index}
                 >
-                    <Blockdiv>
+                    <BlockDiv>
                         <p>{event.name}</p><br/>
                         {/* <p>{event.result.manGroup.first}</p> */}
-                    </Blockdiv>
+                    </BlockDiv>
                 </div>
             )
         })

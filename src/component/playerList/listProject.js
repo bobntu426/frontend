@@ -1,4 +1,4 @@
-import { RowFlexdiv,SmallFlexDiv } from "../../styleComponent"
+import { RowFlexDiv,SmallFlexDiv } from "../../styleComponent"
 const ListProject = ({
     rankTypeList,
     nowGender,
@@ -10,7 +10,7 @@ const ListProject = ({
 })=>{
     
     return(
-        <RowFlexdiv style={{
+        <RowFlexDiv style={{
             marginTop:'5vw',
             marginBottom:'2vw',
             borderBottom: 'solid 1px #c5d1dd'
@@ -57,7 +57,7 @@ const ListProject = ({
             }
             
 
-        </RowFlexdiv>
+        </RowFlexDiv>
     )
 }
 export default ListProject

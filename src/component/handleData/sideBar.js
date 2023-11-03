@@ -1,12 +1,12 @@
-import { PageDiv, RowFlexdiv, SmallFlexDiv,ColumnFlexDiv } from "../../styleComponent"
+import { PageDiv,  SmallFlexDiv,ColumnFlexDiv } from "../../styleComponent"
 import { useNavigate } from "react-router-dom"
 import {useSearchParams} from "react-router-dom"
 const HandleData=()=>{
     const [searchParams,setSearchParams]= useSearchParams()
     const data = [
-        {name:"選手資料",type:'player'},
-        {name:"賽事資料",type:'event'},
-        {name:"學校資料",type:'school'},
+        {name:"選手資料",type:'handlePlayerData'},
+        {name:"賽事資料",type:'handleEventData'},
+        {name:"學校資料",type:'handleSchoolData'},
     ]
     
     const navigate=useNavigate()
@@ -30,8 +30,7 @@ const HandleData=()=>{
                     flex: 1
                 }}
                 onClick={()=>{
-                    searchParams.set('type',d.type)
-                    setSearchParams(searchParams)
+                    navigate(`/${d.type}?action=modify`)
                 }}
                 onMouseOver={()=>{}}
                 key={index}

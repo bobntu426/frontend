@@ -25,7 +25,7 @@ const ColumnFlexDiv = styled.div`
     flex-direction: column;
     /* border: solid 2px rgb(181, 207, 29); */
 `
-const RowFlexdiv = styled.div`
+const RowFlexDiv = styled.div`
     display: flex;
     min-width:'700px';
     width: 100%;
@@ -35,7 +35,7 @@ const RowFlexdiv = styled.div`
     /* border: solid 2px rgb(181, 207, 29);  */
 `
 
-const Blockdiv = styled.div`
+const BlockDiv = styled.div`
     display: flex;
     min-width: '700px';
     min-height: '100px';
@@ -47,4 +47,4 @@ const Blockdiv = styled.div`
     margin: 20px 10px 10px 10px;
     padding: 10px 10px 10px 10px;
 `
-export {PageDiv,SmallFlexDiv,ColumnFlexDiv,RowFlexdiv,Blockdiv}
+export {PageDiv,SmallFlexDiv,ColumnFlexDiv,RowFlexDiv,BlockDiv}
