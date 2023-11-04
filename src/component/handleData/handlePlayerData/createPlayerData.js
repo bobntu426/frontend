@@ -3,13 +3,13 @@ import { ColumnFlexDiv, RowFlexDiv, SmallFlexDiv } from '../../../styleComponent
 import InputAdornment from '@mui/material/InputAdornment';
 import FormHelperText from '@mui/material/FormHelperText';
 import * as React from 'react';
-import Input from '@material-ui/core/Input';
+
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 
 
-const InputData=({values,handleChange,schoolList})=>{
+const CreatePlayerData=({values,handleChange,schoolList})=>{
     const inputField=[
         {name:"姓名",value:values.name,change:'name'},
         {name:"打法",value:values.playType,change:'playType'},
@@ -87,4 +87,4 @@ const InputData=({values,handleChange,schoolList})=>{
     </>
     )
 }
-export default InputData
+export default CreatePlayerData

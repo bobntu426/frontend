@@ -23,7 +23,7 @@ const ResponsiveAppBar = ({isAdministrator,setIsAdministrator,setUser}) => {
     {name:'新聞',router:'/news'}, 
     {name:'影片',router:'/video'},
   ];
-  isAdministrator?pages=[...pages,{name:'管理資料',router:'/handlePlayerData?action=modify'}]:pages=[...pages]
+  isAdministrator?pages=[...pages,{name:'資料管理',router:'/handlePlayerData/index'}]:pages=[...pages]
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 

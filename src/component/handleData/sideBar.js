@@ -30,7 +30,7 @@ const HandleData=()=>{
                     flex: 1
                 }}
                 onClick={()=>{
-                    navigate(`/${d.type}?action=modify`)
+                    navigate(`/${d.type}/index`)
                 }}
                 onMouseOver={()=>{}}
                 key={index}
@@ -44,7 +44,6 @@ const HandleData=()=>{
                     display:'flex',
                     position:'absolute',
                     top:'42%',
-                    
                     justifyContent:'center',
                     minHeight:'15px',
                     cursor: 'pointer'

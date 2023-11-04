@@ -2,8 +2,8 @@ import * as React from 'react';
 import { useState,useEffect } from 'react';
 import { ColumnFlexDiv, PageDiv, RowFlexDiv, SmallFlexDiv } from '../styleComponent';
 import SideBar from '../component/handleData/sideBar'
-import InputData from '../component/handleData/handlePlayerData/inputData';
-import SelectData from '../component/handleData/handlePlayerData/selectData';
+import ModifyEventData from '../component/handleData/handleEventData/modifyEventData';
+import CreateEventData from '../component/handleData/handleEventData/createEventData';
 import { GET_SCHOOL } from '../graphql/queries';
 import { useQuery } from 'react-apollo';
 import InputDate from '../component/handleData/handlePlayerData/inputDate';
@@ -40,7 +40,7 @@ export default function InputAdornments() {
                   marginRight:'10vw',
                   height: '450px'
                 }}>{loadSchool?<p>loading</p>:<>
-                  <InputData values={values} handleChange={handleChange} schoolList={schoolList}/>
+                  <ModifyEventData values={values} handleChange={handleChange} schoolList={schoolList}/>
                   {/* <SelectData values={values} handleChange={handleChange} schoolList={schoolList} />
                   <InputDate /> */}
 

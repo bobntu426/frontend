@@ -17,11 +17,7 @@ import HandleEventData from './page/handleEventData'
 
 import Menu from './menu/menu'
 
-import {
-
-  Routes,
-  Route,
-} from 'react-router-dom'
+import {Routes,Route,} from 'react-router-dom'
 import EventList from './page/eventList'
 import ResultList from './page/resultList'
 import handleData from './component/handleData/sideBar.js'
@@ -49,7 +45,6 @@ function App() {
             setIsAdministrator={setIsAdministrator}
           />} 
           path="/login" 
-          
         />
         <Route element={<News />} path="/news" />
         <Route element={<PlayerList />} path="/playerList" />
@@ -60,9 +55,9 @@ function App() {
         <Route element={<Video />} path="/video" />
         <Route element={<School />} path="/school" />
         <Route element={<SchoolList />} path="/schoolList" />
-        <Route element={<HandlePlayerData />} path="/handlePlayerData" />
-        <Route element={<HandleSchoolData />} path="/handleSchoolData" />
-        <Route element={<HandleEventData />} path="/handleEventData" />
+        <Route element={<HandlePlayerData />} path="/handlePlayerData/*" />
+        <Route element={<HandleSchoolData />} path="/handleSchoolData/*" />
+        <Route element={<HandleEventData />} path="/handleEventData/*" />
       </Routes>
     </>
   )
